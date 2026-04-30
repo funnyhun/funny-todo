@@ -12,30 +12,44 @@ import {
   ArrowUpRight
 } from "lucide-react";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useIdeas } from "@/hooks/useIdeas";
 
 export default function DashboardPage() {
   const { user } = useAuth();
+  const { ideas } = useIdeas();
+  const router = useRouter();
+
+  const activeCount = ideas.filter(i => i.status?.toLowerCase() === 'active').length;
+  const blogCount = ideas.filter(i => i.type === 'blog').length;
+  const completedCount = ideas.filter(i => i.status?.toLowerCase() === 'completed').length;
+  const pendingCount = ideas.filter(i => {
+    const status = i.status?.toLowerCase();
+    return status === 'locked' || status === 'archived';
+  }).length;
 
   const stats = [
-    { name: "Active Ideas", value: "12", icon: BrainCircuit, color: "var(--primary)" },
-    { name: "Blog Nodes", value: "8", icon: Network, color: "#10B981" },
-    { name: "Completed", value: "45", icon: CheckCircle2, color: "#3B82F6" },
-    { name: "Pending", value: "3", icon: Clock, color: "#F59E0B" },
+    { name: "진행 중인 아이디어", value: activeCount.toString(), icon: BrainCircuit, color: "var(--primary)", href: "/dashboard/idea?status=active" },
+    { name: "마인드 그래프 노드", value: blogCount.toString(), icon: Network, color: "#10B981", href: "/dashboard/graph" },
+    { name: "완료된 항목", value: completedCount.toString(), icon: CheckCircle2, color: "#3B82F6", href: "/dashboard/idea?status=completed" },
+    { name: "잠금/보관됨", value: pendingCount.toString(), icon: Clock, color: "#F59E0B", href: "/dashboard/idea?status=pending" },
   ];
 
-  const recentIdeas = [
-    { id: 1, title: "Next.js 16 Performance Guide", status: "Active", tags: ["tech", "blog"], date: "2026-04-29" },
-    { id: 2, title: "Funny Todo Architecture", status: "Draft", tags: ["project", "design"], date: "2026-04-28" },
-    { id: 3, title: "React Flow Custom Nodes", status: "Completed", tags: ["tutorial"], date: "2026-04-25" },
-  ];
+  const recentIdeas = ideas.slice(0, 3).map(i => ({
+    id: i.id,
+    title: i.title,
+    status: i.status,
+    date: i.created_at ? new Date(i.created_at).toLocaleDateString() : 'Recent'
+  }));
 
   return (
     <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
       <header style={{ marginBottom: "3rem" }}>
         <h1 style={{ fontSize: "2rem", fontWeight: 700, marginBottom: "0.5rem" }}>
-          Welcome back, {user?.email?.split('@')[0]} 👋
+          환영합니다, {user?.email?.split('@')[0]}님 👋
         </h1>
-        <p style={{ color: "var(--text-secondary)" }}>Here's what's happening with your creative flow today.</p>
+        <p style={{ color: "var(--text-secondary)" }}>오늘의 창의적인 흐름을 확인해보세요.</p>
       </header>
 
       {/* Stats Grid */}
@@ -47,8 +61,32 @@ export default function DashboardPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1 }}
             className="glass-card"
-            style={{ display: "flex", alignItems: "center", gap: "1.25rem" }}
+            style={{ 
+              display: "flex", 
+              alignItems: "center", 
+              gap: "1.25rem", 
+              cursor: 'pointer', 
+              height: '100%',
+              border: "none",
+              background: "var(--glass-bg)",
+              backdropFilter: "blur(12px)",
+              boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.1)",
+              position: "relative",
+              overflow: "hidden"
+            }}
+            whileHover={{ y: -5, transition: { duration: 0.2 } }}
+            onClick={() => router.push(stat.href)}
           >
+            {/* Decorative accent */}
+            <div style={{ 
+              position: "absolute", 
+              top: 0, 
+              left: 0, 
+              width: "4px", 
+              height: "100%", 
+              background: stat.color 
+            }} />
+            
             <div style={{ 
               width: "48px", 
               height: "48px", 
@@ -58,7 +96,7 @@ export default function DashboardPage() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              border: `1px solid ${stat.color}30`
+              border: `1px solid ${stat.color}20`
             }}>
               <stat.icon size={24} />
             </div>
@@ -75,66 +113,75 @@ export default function DashboardPage() {
         {/* Left Column: Recent Ideas */}
         <div className="glass-card" style={{ padding: "1.5rem" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.5rem" }}>
-            <h3 style={{ fontSize: "1.25rem", fontWeight: 600 }}>Recent Ideas</h3>
-            <button className="btn btn-ghost" style={{ padding: "0.4rem 0.8rem", fontSize: "0.85rem" }}>View All</button>
+            <h3 style={{ fontSize: "1.25rem", fontWeight: 600 }}>최근 아이디어</h3>
+            <Link href="/dashboard/idea" className="btn btn-ghost" style={{ padding: "0.4rem 0.8rem", fontSize: "0.85rem" }}>모두 보기</Link>
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-            {recentIdeas.map((idea) => (
-              <div 
-                key={idea.id} 
-                className="glass"
-                style={{ 
-                  padding: "1rem", 
-                  borderRadius: "var(--radius-md)", 
-                  display: "flex", 
-                  justifyContent: "space-between", 
-                  alignItems: "center",
-                  cursor: "pointer",
-                  transition: "background 0.2s ease"
-                }}
-              >
-                <div>
-                  <div style={{ fontWeight: 600, marginBottom: "0.4rem" }}>{idea.title}</div>
-                  <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
-                    <span style={{ 
-                      fontSize: "0.7rem", 
-                      padding: "0.15rem 0.5rem", 
-                      borderRadius: "4px", 
-                      background: idea.status === "Active" ? "rgba(124, 92, 252, 0.15)" : "rgba(255, 255, 255, 0.05)",
-                      color: idea.status === "Active" ? "var(--primary)" : "var(--text-muted)",
-                      border: idea.status === "Active" ? "1px solid rgba(124, 92, 252, 0.2)" : "1px solid rgba(255, 255, 255, 0.1)"
-                    }}>
-                      {idea.status}
-                    </span>
-                    <span style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>• {idea.date}</span>
+            {recentIdeas.length > 0 ? recentIdeas.map((idea) => (
+              <Link key={idea.id} href={`/dashboard/idea?id=${idea.id}`} style={{ textDecoration: 'none', color: 'inherit' }} onClick={(e) => {
+              e.preventDefault();
+              router.push(`/dashboard/idea?id=${idea.id}`);
+            }}>
+                  <div 
+                    className="glass"
+                    style={{ 
+                      padding: "1rem", 
+                      borderRadius: "var(--radius-md)", 
+                      display: "flex", 
+                      justifyContent: "space-between", 
+                      alignItems: "center",
+                      cursor: "pointer",
+                      transition: "all 0.2s ease",
+                      border: "1px solid var(--glass-border)"
+                    }}
+                  >
+                    <div>
+                      <div style={{ fontWeight: 600, marginBottom: "0.4rem" }}>{idea.title}</div>
+                      <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
+                        <span style={{ 
+                          fontSize: "0.7rem", 
+                          padding: "0.15rem 0.5rem", 
+                          borderRadius: "4px", 
+                          background: idea.status?.toLowerCase() === "active" ? "rgba(124, 92, 252, 0.15)" : "rgba(255, 255, 255, 0.05)",
+                          color: idea.status?.toLowerCase() === "active" ? "var(--primary)" : "var(--text-muted)",
+                          border: "none"
+                        }}>
+                          {idea.status?.toLowerCase() === 'completed' ? '완료' : (idea.status?.toLowerCase() === 'locked' ? '잠금' : '진행 중')}
+                        </span>
+                        <span style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>• {idea.date}</span>
+                      </div>
+                    </div>
+                    <ArrowUpRight size={18} color="var(--text-muted)" />
                   </div>
-                </div>
-                <ArrowUpRight size={18} color="var(--text-muted)" />
-              </div>
-            ))}
+              </Link>
+            )) : (
+              <p style={{ color: 'var(--text-muted)', textAlign: 'center', padding: '2rem' }}>아직 아이디어가 없습니다. 첫 번째 체인을 시작해보세요!</p>
+            )}
           </div>
         </div>
 
         {/* Right Column: Actions & Tips */}
         <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
           <div className="glass-card" style={{ background: "linear-gradient(135deg, var(--primary), #a78bfa)", border: "none" }}>
-            <h3 style={{ color: "white", marginBottom: "0.75rem" }}>Create New Idea</h3>
+            <h3 style={{ color: "white", marginBottom: "0.75rem" }}>새 아이디어 만들기</h3>
             <p style={{ color: "rgba(255,255,255,0.8)", fontSize: "0.9rem", marginBottom: "1.5rem" }}>
-              Ready to capture your next big breakthrough? Start a new idea chain now.
+              다음의 위대한 아이디어를 기록할 준비가 되셨나요? 지금 바로 시작하세요.
             </p>
-            <button className="btn" style={{ background: "white", color: "var(--primary)", border: "none", width: "100%" }}>
+            <Link href="/dashboard/idea?new=true" className="btn" style={{ background: "white", color: "var(--primary)", border: "none", width: "100%", display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
               <Plus size={20} />
-              New Idea
-            </button>
+              새 아이디어 추가
+            </Link>
           </div>
 
-          <div className="glass-card">
-            <h3 style={{ fontSize: "1.1rem", marginBottom: "1rem" }}>Creative Tip</h3>
-            <p style={{ color: "var(--text-secondary)", fontSize: "0.9rem", lineHeight: 1.5 }}>
-              Use the "Node Graph" to visualize connections between your blog topics. It helps identify content gaps and potential serial posts.
-            </p>
-          </div>
+          <Link href="/dashboard/graph" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <div className="glass-card" style={{ cursor: 'pointer' }}>
+              <h3 style={{ fontSize: "1.1rem", marginBottom: "1rem" }}>창의적인 팁</h3>
+              <p style={{ color: "var(--text-secondary)", fontSize: "0.9rem", lineHeight: 1.5 }}>
+                "마인드 그래프"를 사용하여 블로그 주제 간의 연결을 시각화하세요. 콘텐츠의 공백을 찾고 연재 포스팅을 계획하는 데 도움이 됩니다.
+              </p>
+            </div>
+          </Link>
         </div>
       </div>
     </div>
