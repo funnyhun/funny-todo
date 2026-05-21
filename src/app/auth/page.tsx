@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { supabase } from "@/lib/supabase";
+import { supabase } from "@/api/supabase";
 import { Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";

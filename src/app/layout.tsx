@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import { AuthProvider } from "@/components/providers/AuthProvider";
+import { ClientLayout } from "@/ui/layout/ClientLayout";
 
-const inter = Inter({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  variable: "--font-inter",
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-plus-jakarta",
 });
 
 export const metadata: Metadata = {
-  title: "Funny Todo — Creative Idea Bank",
-  description: "A personalized idea chain and blog node management tool for funnyhun.",
+  title: "IDEA-FLOW | Vibrant Mission Control",
+  description: "Next-gen Neo-Brutalism productivity tool for creative minds.",
 };
 
 export default function RootLayout({
@@ -19,11 +20,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body>
-        <AuthProvider>
-          {children}
-        </AuthProvider>
+    <html lang="en">
+      <body className={`${plusJakartaSans.variable} font-sans`}>
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );

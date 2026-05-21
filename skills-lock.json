@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "skills": {
+    "app-architecture-expert": {
+      "source": "local/app-architecture-expert",
+      "sourceType": "local",
+      "skillPath": ".agents/skills/app-architecture-expert/SKILL.md",
+      "computedHash": "local-app-architecture-expert-hash-code"
+    },
+    "next-expert": {
+      "source": "local/next-expert",
+      "sourceType": "local",
+      "skillPath": ".agents/skills/next-expert/SKILL.md",
+      "computedHash": "local-next-expert-hash-code"
+    },
+    "enhance-prompt": {
+      "source": "google-labs-code/stitch-skills",
+      "sourceType": "github",
+      "skillPath": "skills/enhance-prompt/SKILL.md",
+      "computedHash": "71cc23e9ec5fc6361e12453495fa8c683f6cf26f3efaf9b230b0f43e0a32cc96"
+    },
+    "react:components": {
+      "source": "google-labs-code/stitch-skills",
+      "sourceType": "github",
+      "skillPath": "skills/react-components/SKILL.md",
+      "computedHash": "01a94f035a1c3a1a405f611c0df212433d8973f18bf16e94540875ec58ee7b9b"
+    },
+    "stitch-design": {
+      "source": "google-labs-code/stitch-skills",
+      "sourceType": "github",
+      "skillPath": "skills/stitch-design/SKILL.md",
+      "computedHash": "6df709345652460b4d4fdf214476a20c75d76a2ae011a958a51de2c88e6d86d1"
+    },
+    "vercel-react-best-practices": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/react-best-practices/SKILL.md",
+      "computedHash": "ca7b0c0c6e5f2750043f7f0cd72d16ac4e2abc48f9b5500d047a4b77a2506212"
+    }
+  }
+}

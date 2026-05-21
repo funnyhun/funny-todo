@@ -1,0 +1,510 @@
+{
+  "version": "2.11",
+  "children": [
+    {
+      "type": "frame",
+      "id": "UH93i",
+      "x": -1200,
+      "y": 0,
+      "name": "Design System",
+      "fill": "#F1F5F9",
+      "layout": "vertical",
+      "gap": 40,
+      "padding": 40,
+      "children": [
+        {
+          "type": "frame",
+          "id": "sA80K",
+          "name": "Component/StatusBadge",
+          "reusable": true,
+          "fill": "#0284c71f",
+          "cornerRadius": 999,
+          "stroke": {
+            "thickness": 1,
+            "fill": "#38bdf84d"
+          },
+          "effect": {
+            "type": "background_blur",
+            "radius": 8
+          },
+          "padding": [
+            4,
+            12
+          ],
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "ACaif",
+              "fill": "$primary",
+              "content": "READY",
+              "fontFamily": "Inter",
+              "fontSize": 10,
+              "fontWeight": "800"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "VZATJ",
+          "name": "Component/NeoButton",
+          "reusable": true,
+          "fill": "$glass-bg",
+          "cornerRadius": 16,
+          "stroke": {
+            "thickness": 1,
+            "fill": "$glass-border"
+          },
+          "effect": {
+            "type": "background_blur",
+            "radius": 12
+          },
+          "gap": 8,
+          "padding": [
+            12,
+            24
+          ],
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "qoNYe",
+              "fill": "$font-primary",
+              "content": "Action",
+              "fontFamily": "Inter",
+              "fontSize": 14,
+              "fontWeight": "600"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "V7DEG",
+          "name": "Component/IdeaCard",
+          "reusable": true,
+          "width": 320,
+          "fill": "$glass-bg",
+          "cornerRadius": 24,
+          "stroke": {
+            "thickness": 1,
+            "fill": "$glass-border"
+          },
+          "effect": [
+            {
+              "type": "background_blur",
+              "radius": 20
+            },
+            {
+              "type": "shadow",
+              "shadowType": "outer",
+              "color": "#0000000a",
+              "offset": {
+                "x": 0,
+                "y": 4
+              },
+              "blur": 24
+            }
+          ],
+          "layout": "vertical",
+          "gap": 16,
+          "padding": 32,
+          "children": [
+            {
+              "type": "text",
+              "id": "A4ij86",
+              "fill": "$font-primary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Idea Title",
+              "fontFamily": "Inter",
+              "fontSize": 20,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "IcuLJ",
+              "fill": "$font-secondary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Description goes here with some details about the task.",
+              "fontFamily": "Inter",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "uy4n1",
+              "gap": 8,
+              "children": [
+                {
+                  "id": "xXmqz",
+                  "type": "ref",
+                  "ref": "sA80K"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "tZz3z",
+          "name": "Component/NeoNode",
+          "reusable": true,
+          "width": 200,
+          "fill": "$glass-bg",
+          "cornerRadius": 16,
+          "stroke": {
+            "thickness": 1,
+            "fill": "$glass-border"
+          },
+          "effect": {
+            "type": "background_blur",
+            "radius": 16
+          },
+          "layout": "vertical",
+          "padding": 20,
+          "children": [
+            {
+              "type": "text",
+              "id": "nySn1",
+              "fill": "#000000",
+              "content": "Node Title",
+              "fontFamily": "Inter",
+              "fontSize": 16,
+              "fontWeight": "600"
+            },
+            {
+              "type": "ellipse",
+              "id": "naxdM",
+              "layoutPosition": "absolute",
+              "x": 94,
+              "y": -6,
+              "fill": "#000000",
+              "width": 12,
+              "height": 12,
+              "stroke": {
+                "thickness": 2,
+                "fill": "#FFF"
+              }
+            },
+            {
+              "type": "ellipse",
+              "id": "xYxtH",
+              "layoutPosition": "absolute",
+              "x": 94,
+              "y": 44,
+              "fill": "#000000",
+              "width": 12,
+              "height": 12,
+              "stroke": {
+                "thickness": 2,
+                "fill": "#FFF"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "D7mwsX",
+      "x": -723,
+      "y": 0,
+      "name": "Funny Todo Dashboard",
+      "theme": {
+        "mode": "light"
+      },
+      "clip": true,
+      "width": 1440,
+      "height": 900,
+      "fill": {
+        "type": "gradient",
+        "gradientType": "linear",
+        "enabled": true,
+        "rotation": 45,
+        "size": {
+          "height": 1
+        },
+        "colors": [
+          {
+            "color": "#E0F2FE",
+            "position": 0
+          },
+          {
+            "color": "#F8FAFC",
+            "position": 1
+          }
+        ]
+      },
+      "children": [
+        {
+          "type": "frame",
+          "id": "IhwUB",
+          "name": "Sidebar",
+          "width": 260,
+          "height": "fill_container",
+          "fill": "$glass-bg",
+          "stroke": {
+            "thickness": {
+              "right": 1
+            },
+            "fill": "$glass-border"
+          },
+          "effect": {
+            "type": "background_blur",
+            "radius": 32
+          },
+          "layout": "vertical",
+          "gap": 32,
+          "padding": 40,
+          "children": [
+            {
+              "type": "text",
+              "id": "iRXak",
+              "fill": "$primary",
+              "content": "Funny Todo",
+              "fontFamily": "Inter",
+              "fontSize": 24,
+              "fontWeight": "900"
+            },
+            {
+              "type": "frame",
+              "id": "J0uwz",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "id": "u2XTvd",
+                  "type": "ref",
+                  "ref": "VZATJ",
+                  "width": "fill_container",
+                  "descendants": {
+                    "qoNYe": {
+                      "content": "Dashboard",
+                      "fill": "#000000"
+                    }
+                  }
+                },
+                {
+                  "id": "BuKtQ",
+                  "type": "ref",
+                  "ref": "VZATJ",
+                  "width": "fill_container",
+                  "descendants": {
+                    "qoNYe": {
+                      "content": "Calendar",
+                      "fill": "#000000"
+                    }
+                  }
+                },
+                {
+                  "id": "Rm67F",
+                  "type": "ref",
+                  "ref": "VZATJ",
+                  "width": "fill_container",
+                  "descendants": {
+                    "qoNYe": {
+                      "content": "Graph",
+                      "fill": "#000000"
+                    }
+                  }
+                },
+                {
+                  "id": "DHTNf",
+                  "type": "ref",
+                  "ref": "VZATJ",
+                  "width": "fill_container",
+                  "descendants": {
+                    "qoNYe": {
+                      "content": "Settings",
+                      "fill": "#000000"
+                    }
+                  }
+                },
+                {
+                  "id": "txRB3",
+                  "type": "ref",
+                  "ref": "VZATJ",
+                  "width": "fill_container",
+                  "descendants": {
+                    "qoNYe": {
+                      "content": "Notifications",
+                      "fill": "#000000"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "XWV15",
+          "name": "Main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 40,
+          "padding": 60,
+          "children": [
+            {
+              "type": "frame",
+              "id": "gPa3b",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "R4CE36",
+                  "fill": "#000000",
+                  "content": "My Ideas",
+                  "fontFamily": "Inter",
+                  "fontSize": 32,
+                  "fontWeight": "800"
+                },
+                {
+                  "id": "XjbIr",
+                  "type": "ref",
+                  "ref": "VZATJ",
+                  "descendants": {
+                    "qoNYe": {
+                      "content": "+ New Idea",
+                      "fill": "#000000"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "FFEEu",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "id": "Y3IfNa",
+                  "type": "ref",
+                  "ref": "V7DEG",
+                  "descendants": {
+                    "A4ij86": {
+                      "content": "Smash the bugs",
+                      "fill": "#000000"
+                    },
+                    "IcuLJ": {
+                      "content": "Fixing some UI issues in glassmorphism.",
+                      "fill": "#000000"
+                    }
+                  }
+                },
+                {
+                  "id": "o1CREv",
+                  "type": "ref",
+                  "ref": "V7DEG",
+                  "descendants": {
+                    "A4ij86": {
+                      "content": "New Feature",
+                      "fill": "#000000"
+                    },
+                    "IcuLJ": {
+                      "content": "Implementing a mind map view for better logic.",
+                      "fill": "#000000"
+                    }
+                  }
+                },
+                {
+                  "id": "Sf6Uw",
+                  "type": "ref",
+                  "ref": "V7DEG",
+                  "descendants": {
+                    "A4ij86": {
+                      "content": "Refactor",
+                      "fill": "#000000"
+                    },
+                    "IcuLJ": {
+                      "content": "Clean up the logic for task management.",
+                      "fill": "#000000"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "themes": {
+    "mode": [
+      "light",
+      "dark"
+    ]
+  },
+  "variables": {
+    "glass-bg": {
+      "type": "color",
+      "value": "#FFFFFF66"
+    },
+    "font-primary": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#0F172A",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#F8FAFC",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "warning": {
+      "type": "color",
+      "value": "#F59E0B"
+    },
+    "primary": {
+      "type": "color",
+      "value": "#0284C7"
+    },
+    "success": {
+      "type": "color",
+      "value": "#10B981"
+    },
+    "glass-border": {
+      "type": "color",
+      "value": "#FFFFFF80"
+    },
+    "primary-light": {
+      "type": "color",
+      "value": "#38BDF8"
+    },
+    "font-secondary": {
+      "type": "color",
+      "value": "#64748B"
+    },
+    "bg-main": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#F8FAFC",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#0F172A",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    }
+  }
+}

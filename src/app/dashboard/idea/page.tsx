@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { BrainCircuit } from "lucide-react";
-import IdeaChainContent from "@/components/dashboard/IdeaChainContent";
+import { IdeaChainContent } from "@/ui";
 
 function IdeaPageFallback() {
   return (
